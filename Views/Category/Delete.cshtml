@@ -1,0 +1,25 @@
+﻿@model MoonSpace.Models.Category
+
+@{
+    ViewData["Title"] = "Radera";
+}
+
+<h1>Radera</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CategoryId" />
+        <input type="submit" value="Radera" class="btn btn-danger" /> |
+        <a asp-action="Index">Avbryt</a>
+    </form>
+</div>

@@ -1,0 +1,58 @@
+﻿@model MoonSpace.Models.Product
+
+@{
+    ViewData["Title"] = "Skapa Produkt";
+}
+
+<h1>Skapa ny produkt</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductPrice" class="control-label"></label>
+                <input asp-for="ProductPrice" class="form-control" />
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" class="form-control">
+                    @* Loop out all the product categories available *@
+                    @foreach (var item in ViewBag.CategoryList)
+                    {
+                        <option value="@item.Type">@item.Type</option>
+                    }
+                </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageName" class="control-label"></label>
+                <input asp-for="ImageName" class="form-control" />
+                <span asp-validation-for="ImageName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Spara" class="button btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Avbryt</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,27 @@
+﻿@model MoonSpace.Models.Product
+
+@{
+    ViewData["Title"] = "Detaljer om produkt";
+}
+
+
+<a class="float-right" asp-action="Products">Tillbaka till listan</a>
+<div class="procuct-flex">
+    <img src="~/images/@Html.DisplayFor(model => model.ImageName)" />
+    <div class="spec-prod-flex-text">
+        <h3 class="spec-prod-heading">@Html.DisplayFor(model => model.ProductName)</h3>
+        <p>@Html.DisplayFor(model => model.Description)</p>
+        <p class="spec-prod-price">Pris: @Html.DisplayFor(model => model.ProductPrice) kr</p>
+
+        <form asp-action="CreateOrder" method="GET">
+            <div class="form-group by-prod-form">
+                <label for="productId" class="control-label"></label>
+                <input class="form-control" name="productId" id="productId" value="@Model.ProductId" hidden />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Köp" class="button btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>

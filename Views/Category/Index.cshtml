@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MoonSpace.Models.Category>
+
+@{
+    ViewData["Title"] = "Kategorier";
+}
+
+<h1>Produkt kategorier</h1>
+
+<p class="float-right">
+    <a asp-action="Create">Lägg till ny kategori</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.CategoryId">Radera</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

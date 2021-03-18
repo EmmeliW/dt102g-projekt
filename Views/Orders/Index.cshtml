@@ -1,0 +1,97 @@
+﻿@model IEnumerable<MoonSpace.Models.Orders>
+
+@{
+    ViewData["Title"] = "Ordrar";
+}
+
+<h1>Ordrar</h1>
+<hr />
+<h3>Obetalda ordrar</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paid)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var i in Model)
+        {
+            foreach (var j in ViewBag.NotSPaidOrders)
+            {
+                if (i.OrderID == j)
+                {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => i.OrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.Paid)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@i.OrderID">Behandla</a> |
+                <a asp-action="Delete" asp-route-id="@i.OrderID">Radera</a>
+            </td>
+        </tr>
+
+                }
+            }
+        }
+    </tbody>
+</table>
+
+<h3>Betalda ordrar</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paid)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var k in Model)
+        {
+            foreach (var l in ViewBag.PaidOrders)
+            {
+                if (k.OrderID == l)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => k.OrderID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => k.OrderDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => k.Paid)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@k.OrderID">Behandla</a> |
+                            <a asp-action="Delete" asp-route-id="@k.OrderID">Radera</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html lang="se">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MoonSpace</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+
+    <!--Font awsome icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+
+    <!--Google fonts used-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="Pre-header">
+                <partial name="_LoginPartial" />
+            </div> @* End Pre-header *@
+            <div class="Header-pics">
+                <img src="~/images/crystal-pic.1.jpg" alt="" />
+                <img src="~/images/crystal-pic-2.jpg" alt="" />
+                <img src="~/images/crystal-pic-3.jpg" alt="" />
+            </div> @* End Header-pics *@
+            <div class="Menu">
+                <h1><a class="header-text nav-text navbar-brand" asp-area="" asp-controller="MoonSpace" asp-action="Start">Moonspace</a></h1>
+                <div class="navbar navbar-collapse d-sm-inline-flex flex-sm-row-reverse">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a href="javascript:void(0)" class="open-button" id="open-button" onclick="openNav()"><i class="fas fa-bars"></i></a>
+                        <a href="javascript:void(0)" class="close-button" id="close-button" onclick="closeNav()"><i class="fas fa-times"></i></a> <!--Hidden by default-->
+                    }
+                    @if (@User.Identity.Name == "emmeli@moonspace.com")
+                    {
+                        <ul class="nav-navbar" id="mobile-menu">
+                            <li class="nav-item nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Produkter</a>
+                            </li>
+                            <li class="nav-item nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Category" asp-action="Index">Kategorier</a>
+                            </li>
+                            <li class="nav-item nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Index">Ordrar</a>
+                            </li>
+                            <li class="nav-item nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Costumer" asp-action="Index">Kunder</a>
+                            </li>
+                        </ul>
+                    }
+                    else if (SignInManager.IsSignedIn(User))
+                    {
+                        <ul class="nav-navbar" id="mobile-menu">
+                            <li class="nav-item nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="MoonSpace" asp-action="Products">Produkter</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div> @* End Menu *@
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Om MoonSpace</a>
+            <a href="#">Kontakt</a>
+            <a href="#">FAQ</a>
+            <a href="#">Köpvillkor</a>
+        </div>
+        <div class="footer-social">
+            <p>Följ oss på sociala medier</p>
+            <a class="footer-social-media" href="#"><i class="fab fa-facebook-square"></i> <i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="footer-newsletter">
+            <p>Prenumerera på vårt nyhetsbrev för att ta del av nyheter och erbjudanden</p>
+            <input type="text" />
+            <button class="prenumirera">Prenumirera</button>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

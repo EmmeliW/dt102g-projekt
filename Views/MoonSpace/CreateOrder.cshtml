@@ -1,0 +1,51 @@
+﻿@model MoonSpace.Models.Orders
+
+@{
+    ViewData["Title"] = "Skapa";
+}
+
+<h1>Bekräfta ditt köp</h1>
+
+<hr />
+<p class="font-weight-bold">Kurs:</p>
+<p>@ViewBag.ProductName</p>
+<p class="font-weight-bold">Kostnad</p>
+<p>@ViewBag.ProductPrice kr</p>
+<hr />
+<br />
+<p>
+    När du klickar på "Berkäfta order" nedan går din order igenom och du blir förbunden att betala ditt köp.
+    Självklart gäller normal ångertid enligt konsumentköplagen. För mer info se köpvillkor.
+</p>
+<br />
+<p>
+    Information om betalning skickas till @User.Identity.Name och så fort betalningen är registrerad
+    får du information om hur du kan ta del av ditt köp på våran kursplattform.
+</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateOrder">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="ProductId" class="form-control" value="@ViewBag.productId" hidden />
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="CostumerId" class="form-control" value="@ViewBag.costumer" hidden />
+                <span asp-validation-for="CostumerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Bekräfta order" class="button-by button btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Products">Avbryt</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

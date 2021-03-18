@@ -1,0 +1,49 @@
+﻿@model MoonSpace.Models.Product
+
+@{
+    ViewData["Title"] = "Radera produkt";
+}
+
+<h1>Radera produkt</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductPrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProductPrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ImageName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ProductId" />
+        <input type="submit" value="Radera" class="btn btn-danger" /> |
+        <a asp-action="Index">Avbryt</a>
+    </form>
+</div>

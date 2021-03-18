@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MoonSpace.Models.Product>
+
+@{
+    ViewData["Title"] = "Produkter";
+}
+
+<h1 class="text-center">Produkter</h1>
+
+<div class="search-stuff">
+    <form asp-controller="MoonSpace" asp-action="Products">
+        <label for="SearchString">Sök:</label>
+        <input type="text" name="SearchString" />
+        <input class="button" type="submit" value="Sök" />
+    </form>
+    <form asp-action="Products">
+        <label for="SearchString">Kategorier</label>
+        <select class="select" name="SearchString" id="SearchString">
+            @foreach (var item in ViewBag.TypeList)
+            {
+                <option value="@item.Type">@item.Type</option>
+            }
+        </select>
+        <input class="button" type="submit" value="Sök" />
+    </form>
+    <form asp-action="Products">
+        <input type="hidden" name="SearchString" />
+        <input class="button" type="submit" value="Återställ" />
+    </form>
+</div>
+<hr />
+
+
+<div class="prod-flex">
+    @foreach (var item in Model)
+    {
+        <div>
+            <img class="prod-img" src="~/images/@Html.DisplayFor(modelItem => item.ImageName)" />
+            <h3 class="product-heading">@Html.DisplayFor(modelItem => item.ProductName)</h3>
+            <p class="text-center">Pris: @Html.DisplayFor(modelItem => item.ProductPrice) kr</p>
+            <a class="button read-more" asp-action="ProductDetails" asp-route-id="@item.ProductId">Läs mer</a>
+
+        </div>
+    }
+</div>
+        
